@@ -1,5 +1,3 @@
-use std::borrow::Cow;
-
 use crate::app::App;
 use crate::chat::{Chat, Message, User};
 use colors_transform::Color as TColor;
@@ -15,7 +13,7 @@ use ratatui::{
     widgets::{Block, Borders, List, ListItem, ListState, Tabs},
     Frame, //Terminal,
 };
-use textwrap::{fill, wrap, Options};
+use textwrap::{wrap, Options};
 
 pub fn draw<B: Backend>(app: &App, frame: &mut Frame<B>) {
     let tab_view = TabView::new(vec![String::from("Chat"), String::from("Users")]);
