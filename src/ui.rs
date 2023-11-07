@@ -210,9 +210,9 @@ impl MessageCard {
 
 impl From<MessageCard> for ListItem<'_> {
     fn from(value: MessageCard) -> Self {
-        let user_width = value.user_text.name.len() + 1;
-        let indent = &String::from_iter((0..=user_width).map(|_| " "));
-        let options = Options::new(value.width as usize - user_width).subsequent_indent(indent);
+        let user_width = value.user_text.name.len();
+        let indent = &String::from_iter((0..user_width + 2).map(|_| " "));
+        let options = Options::new(value.width as usize - user_width - 4).subsequent_indent(indent);
         let body = wrap(value.body.as_str(), options);
         let (first, rest) = body.split_first().unwrap();
         let mut text = Text::from(Line::from(vec![
@@ -220,7 +220,7 @@ impl From<MessageCard> for ListItem<'_> {
             Span::from(": "),
             Span::from(first.to_string()),
         ]));
-        text.extend(rest.iter().map(|l| Span::raw(l.to_string())));
+        text.extend(rest.iter().map(|l| Span::from(l.to_string())));
 
         ListItem::new(text)
     }
