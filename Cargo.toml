@@ -6,11 +6,21 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio-tungstenite = { version = "0.17.2", features = ["native-tls"] }
-tokio = { version = "1.21.2", default-features = false, features = ["io-util", "rt", "io-std", "macros", "rt-multi-thread"] }
-futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+tokio-tungstenite = { version = "0.18", features = ["native-tls"] }
+tokio = { version = "1.32.0", default-features = false, features = ["io-util", "rt", "io-std", "macros", "rt-multi-thread", "sync"] }
+futures-util = { version = "0.3.28", default-features = false, features = ["sink", "std"] }
+futures-sink = "0.3.28"
+futures-channel = "0.3.28"
 url = { version = "2.3.1" }
-futures-channel = "0.3"
 serde = { version = "1.0.147", features = ["derive"] }
 serde_json = "1.0.87"
-async-trait = "0.1.58"
+async-trait = "0.1.68"
+# tui = {version = "0.19", features = ["crossterm", "termion"], default-features = false }
+crossterm = "0.27.0"
+reqwest = { version = "0.11.14" }
+colors-transform = "0.2.11"
+argh = "0.1.10"
+lazy_static = "1.4.0"
+textwrap = "0.16.0"
+ratatui = "0.23.0"
+

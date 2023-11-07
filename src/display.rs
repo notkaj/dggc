@@ -1,14 +1,11 @@
+use crate::data::inbound::MessageData;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-use crate::data::inbound::*;
-use async_trait::async_trait;
 
-#[async_trait]
 pub trait Display {
     async fn display(&self);
 }
 
-#[async_trait]
-impl Display for ChatMessage {
+impl Display for MessageData {
     async fn display(&self) {
         let mut stdout = tokio::io::stdout();
         stdout.write_all(self.nick.as_bytes()).await.unwrap();
