@@ -213,16 +213,14 @@ impl From<MessageCard> for ListItem<'_> {
         let user_width = value.user_text.name.len() + 1;
         let indent = &String::from_iter((0..=user_width).map(|_| " "));
         let options = Options::new(value.width as usize - user_width).subsequent_indent(indent);
-        let wrap = wrap(value.body.as_str(), options);
-        // TODO: There must be a better way to do this:
-        let body = wrap.iter().map(|c| c.to_string()).collect::<Vec<_>>();
+        let body = wrap(value.body.as_str(), options);
         let (first, rest) = body.split_first().unwrap();
         let mut text = Text::from(Line::from(vec![
             value.user_text.into(),
             Span::from(": "),
-            Span::from(first.to_owned()),
+            Span::from(first.to_string()),
         ]));
-        text.extend(rest.iter().map(|l| Span::raw(l.to_owned())));
+        text.extend(rest.iter().map(|l| Span::raw(l.to_string())));
 
         ListItem::new(text)
     }
