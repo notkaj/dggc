@@ -1,7 +1,5 @@
 use crate::app::App;
 use crate::chat::{Chat, Message, User};
-use colors_transform::Color as TColor;
-use colors_transform::Rgb;
 use ratatui::style::Stylize;
 use ratatui::{
     backend::Backend,
@@ -122,11 +120,8 @@ struct UserText {
 
 impl UserText {
     fn new(user: &User) -> UserText {
-        let (r, g, b) = match Rgb::from_hex_str(user.color) {
-            Ok(rgb) => rgb.as_tuple(),
-            Err(_) => (0.0, 0.0, 0.0),
-        };
-        let color = Color::Rgb(r as u8, g as u8, b as u8);
+        let (r, g, b) = user.color;
+        let color = Color::Rgb(r, g, b);
         let icon_text = String::from_iter(user.icons.iter().rev().map(|&s| s));
         let full_text = format!(
             "{icons} {name}",

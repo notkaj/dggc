@@ -74,7 +74,7 @@ pub struct Message {
 
 pub struct User {
     pub name: String,
-    pub color: &'static str,
+    pub color: (u8, u8, u8),
     pub labels: Vec<&'static str>,
     pub icons: Vec<&'static str>,
 }

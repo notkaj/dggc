@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use std::error::Error;
 use tokio::sync::OnceCell;
 
-const DEFAULT_COLOR: &str = "#FFFFFF";
+const DEFAULT_COLOR: &str = "#DCDCDC";
 
 const GYM_ICON: &str = "󰇦";
 const NFL_ICON: &str = "󰉝";
