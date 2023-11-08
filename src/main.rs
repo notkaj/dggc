@@ -4,7 +4,6 @@ mod actualization;
 mod app;
 mod chat;
 mod connection;
-mod conversion;
 mod crossterm;
 mod data;
 mod flairs;
