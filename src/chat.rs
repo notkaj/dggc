@@ -1,20 +1,23 @@
+use crate::history;
+use ::bounded_vec_deque::BoundedVecDeque;
 use std::collections::HashMap;
 
-use crate::history;
+const MESSAGE_COUNT_BOUND: usize = 500;
 
 pub struct Chat {
     pub should_quit: bool,
-    pub messages: Vec<Message>,
+    pub messages: BoundedVecDeque<Message>,
     // pub users: Vec<User>,
     pub users_by_name: HashMap<String, User>,
 }
 
 impl Chat {
     pub async fn new() -> Chat {
-        let messages = match history::get_history().await {
+        let history = match history::get_history().await {
             Ok(ms) => ms,
             Err(_) => Vec::new(),
         };
+        let messages = BoundedVecDeque::from_iter(history.into_iter(), MESSAGE_COUNT_BOUND);
         Chat {
             should_quit: false,
             messages,
@@ -53,7 +56,7 @@ impl Chat {
     }
 
     pub fn push_message(&mut self, message: Message) {
-        self.messages.push(message);
+        self.messages.push_back(message);
     }
 
     pub fn push_messages(&mut self, messages: Vec<Message>) {

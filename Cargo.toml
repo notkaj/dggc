@@ -23,4 +23,5 @@ argh = "0.1.10"
 lazy_static = "1.4.0"
 textwrap = "0.16.0"
 ratatui = "0.23.0"
+bounded-vec-deque = "0.1.1"
 
