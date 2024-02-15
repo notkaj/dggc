@@ -1,5 +1,5 @@
 use crate::history;
-use ::bounded_vec_deque::BoundedVecDeque;
+use bounded_vec_deque::BoundedVecDeque;
 use std::collections::HashMap;
 
 //Keep this to one less than a power of 2
@@ -19,7 +19,7 @@ impl Chat {
             Ok(ms) => ms,
             Err(_) => Vec::new(),
         };
-        let messages = BoundedVecDeque::from_iter(history.into_iter().rev(), MESSAGE_COUNT_BOUND);
+        let messages = BoundedVecDeque::from_iter(history.into_iter(), MESSAGE_COUNT_BOUND);
         Chat {
             should_quit: false,
             messages,
@@ -58,10 +58,12 @@ impl Chat {
     }
 
     pub fn push_message(&mut self, message: Message) {
-        self.messages.push_front(message);
+        self.messages.push_back(message);
     }
 
     pub fn push_messages(&mut self, messages: Vec<Message>) {
+        //I don't actually know if this works, the ui updates too fast
+        //but I think the logic makes sense
         self.messages.extend(messages.into_iter());
     }
 }
